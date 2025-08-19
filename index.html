@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Taboo – Play Online</title>
+  <title>Taboo – Voice Enforced</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="theme-default">
@@ -12,7 +12,7 @@
     <header class="topbar">
       <h1 class="brand">🎉 Taboo</h1>
 
-      <!-- Theme selector (top-right) -->
+      <!-- Theme selector -->
       <label class="theme-picker">
         <span>Theme</span>
         <select id="themeSelect">
@@ -37,6 +37,10 @@
           <label>Shuffle deck</label>
           <input id="shuffle" type="checkbox" checked />
         </div>
+        <div class="field">
+          <label>Auto-correct when main word is spoken</label>
+          <input id="autoCorrect" type="checkbox" />
+        </div>
       </div>
       <button id="startBtn" class="btn primary">Start Game</button>
     </section>
@@ -53,9 +57,16 @@
         <ul id="tabooList" class="taboo-list"></ul>
       </div>
 
+      <!-- Voice controls -->
+      <div class="voice">
+        <button id="micBtn" class="btn mic">🎤 Start Listening</button>
+        <span id="micStatus" class="mic-status">Mic: off</span>
+      </div>
+      <div id="transcript" class="transcript" aria-live="polite"></div>
+
       <div class="actions">
         <button id="passBtn" class="btn ghost" title="Skip (no points)">Pass</button>
-        <button id="buzzBtn" class="btn danger" title="Buzz (‑1)">Buzz</button>
+        <button id="buzzBtn" class="btn danger" title="Buzz (-1)">Buzz</button>
         <button id="correctBtn" class="btn success" title="Correct (+1)">Correct</button>
         <button id="nextBtn" class="btn" title="Next Card">Next</button>
       </div>
@@ -69,7 +80,8 @@
     </section>
 
     <footer class="foot">
-      Add/edit cards in <code>script.js</code>. Your theme choice is saved to this browser.
+      Speak to describe the word; if the system hears a taboo word it will buzz automatically.
+      Your theme choice is saved locally. Mic audio never leaves your browser.
     </footer>
   </div>
 

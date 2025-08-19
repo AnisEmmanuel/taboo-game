@@ -1,20 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Taboo Game</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Taboo – Play Online</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div class="game-container">
-    <h1>🎉 Taboo Game 🎉</h1>
-    <div id="card">
-      <h2 id="main-word">Press Start</h2>
-      <ul id="taboo-list"></ul>
-    </div>
-    <button onclick="nextCard()">Next Card</button>
+<body class="theme-default">
+  <div class="app">
+    <!-- Top bar -->
+    <header class="topbar">
+      <h1 class="brand">🎉 Taboo</h1>
+
+      <!-- Theme selector (top-right) -->
+      <label class="theme-picker">
+        <span>Theme</span>
+        <select id="themeSelect">
+          <option value="default">Default</option>
+          <option value="harry">Harry Potter</option>
+          <option value="batman">Batman</option>
+          <option value="superman">Superman</option>
+          <option value="avatar">Avatar</option>
+          <option value="marvel">Marvel</option>
+        </select>
+      </label>
+    </header>
+
+    <!-- Setup -->
+    <section id="setup" class="panel">
+      <div class="row">
+        <div class="field">
+          <label>Round length (seconds)</label>
+          <input id="roundSeconds" type="number" min="15" max="300" value="60" />
+        </div>
+        <div class="field">
+          <label>Shuffle deck</label>
+          <input id="shuffle" type="checkbox" checked />
+        </div>
+      </div>
+      <button id="startBtn" class="btn primary">Start Game</button>
+    </section>
+
+    <!-- Game -->
+    <section id="game" class="panel hidden">
+      <div class="hud">
+        <div><strong>Score:</strong> <span id="score">0</span></div>
+        <div class="timer" id="timer">60</div>
+      </div>
+
+      <div class="card">
+        <div class="word" id="mainWord">Press “Next”</div>
+        <ul id="tabooList" class="taboo-list"></ul>
+      </div>
+
+      <div class="actions">
+        <button id="passBtn" class="btn ghost" title="Skip (no points)">Pass</button>
+        <button id="buzzBtn" class="btn danger" title="Buzz (‑1)">Buzz</button>
+        <button id="correctBtn" class="btn success" title="Correct (+1)">Correct</button>
+        <button id="nextBtn" class="btn" title="Next Card">Next</button>
+      </div>
+    </section>
+
+    <!-- Game Over -->
+    <section id="over" class="panel hidden">
+      <h2>⏱️ Time!</h2>
+      <p>Your final score: <strong id="finalScore">0</strong></p>
+      <button id="playAgainBtn" class="btn primary">Play Again</button>
+    </section>
+
+    <footer class="foot">
+      Add/edit cards in <code>script.js</code>. Your theme choice is saved to this browser.
+    </footer>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

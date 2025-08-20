@@ -3,70 +3,74 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Taboo</title>
+  <title>Taboo — CPU vs Human</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="app">
-    <header class="app__header">
-      <div class="brand">🎉 <strong>Taboo</strong></div>
+  <!-- Background animation layer -->
+  <div id="fx-layer" aria-hidden="true"></div>
 
-      <div class="header-right">
-        <label class="theme-label">
+  <div class="app">
+    <header class="bar">
+      <div class="brand">🎉 Taboo</div>
+      <div class="right">
+        <label class="field">
           <span>Theme</span>
-          <select id="themeSelect">
+          <select id="theme">
             <option value="classic">Classic</option>
+            <option value="harry">Harry Potter</option>
+            <option value="batman">Batman</option>
             <option value="avatar">Avatar</option>
             <option value="marvel">Marvel</option>
-            <option value="batman">Batman</option>
             <option value="superman">Superman</option>
-            <option value="harry">Harry&nbsp;Potter</option>
           </select>
         </label>
       </div>
     </header>
 
-    <section class="topbar">
-      <div class="score">Score: <span id="score">0</span></div>
-      <div class="timer"><span id="timer">60</span></div>
-    </section>
-
-    <section class="card">
-      <h1 id="mainWord" class="word">WORD</h1>
-      <div class="taboo-grid" id="tabooWords">
-        <!-- Filled by JS -->
+    <main class="board">
+      <div class="hud">
+        <div>Score: <span id="score">0</span></div>
+        <div class="timer" id="timer">60</div>
       </div>
-    </section>
 
-    <section class="io">
-      <div class="mic-row">
-        <button id="micStart" class="btn btn-ghost">🎙️ Start Listening</button>
-        <button id="micStop"  class="btn btn-ghost" disabled>⏹️ Stop</button>
-        <span id="micStatus">Mic: off</span>
-      </div>
-      <div id="spokenBox" class="spoken-box" aria-live="polite"></div>
+      <section class="card">
+        <h1 id="word">Loading…</h1>
+        <div id="taboo" class="taboo"></div>
+      </section>
 
-      <div class="guess-row">
-        <input id="guessBox" class="guess" placeholder="Type the guess and press Enter…" />
-        <button id="guessBtn" class="btn">Check Guess</button>
-        <span id="guessResult" class="guess-result" aria-live="polite"></span>
-      </div>
-    </section>
+      <section class="controls">
+        <div class="cpu-row">
+          <button id="cpu-enact" class="btn">CPU: Enact / Speak Clues</button>
+          <span id="cpu-status" class="muted">Idle</span>
+        </div>
 
-    <section class="controls">
-      <button id="passBtn" class="btn btn-ghost">Pass</button>
-      <button id="buzzBtn" class="btn btn-warn">Buzz</button>
-      <button id="correctBtn" class="btn btn-ok">Correct</button>
-      <button id="nextBtn" class="btn">Next</button>
-      <button id="restartBtn" class="btn btn-ghost">Restart</button>
-    </section>
+        <div class="mic-row">
+          <button id="listen" class="btn outline">🎙️ Start Listening</button>
+          <span id="mic-state" class="muted">Mic: off</span>
+        </div>
 
-    <p class="footnote">
-      Speak to describe the word; if the system hears a <em>taboo</em> word it will buzz automatically.
-      Your theme choice is saved locally. Microphone audio never leaves your browser.
-      For best results, use Chrome/Edge.
-    </p>
-  </main>
+        <div class="guess-row">
+          <input id="guess" class="input" placeholder="Type your guess and press Enter…" />
+          <button id="submit-guess" class="btn small">Guess</button>
+        </div>
+
+        <div class="action-row">
+          <button id="pass" class="btn gray">Pass</button>
+          <button id="buzz" class="btn red">Buzz</button>
+          <button id="correct" class="btn green">Correct</button>
+          <button id="next" class="btn">Next</button>
+        </div>
+
+        <div id="log" class="log" aria-live="polite"></div>
+      </section>
+
+      <p class="footer">
+        CPU gives 2–3 short hints (no taboo words). You can speak or type your guess.
+        Speech stays on-device (Web Speech API). Theme choice and score are saved locally.
+      </p>
+    </main>
+  </div>
 
   <script src="script.js"></script>
 </body>
